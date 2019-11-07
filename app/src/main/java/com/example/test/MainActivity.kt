@@ -10,17 +10,20 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import com.example.test.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-
+    private val myName: MyName = MyName("Aleks Haecky")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+
+       binding.myName = myName
 
         val doneBtn: Button = findViewById(R.id.done_button)
 
@@ -33,11 +36,17 @@ class MainActivity : AppCompatActivity() {
         val editText = binding.nicknameEdit//findViewById<EditText>(R.id.nickname_edit)
         val nicknameTextView = binding.nicknameText//findViewById<TextView>(R.id.nickname_text)
 
-        binding.nicknameText.text = binding.nicknameEdit.text
+        binding.apply {
 
-        view.visibility = View.GONE
-        binding.nicknameEdit.visibility = View.GONE
-        binding.nicknameText.visibility = View.VISIBLE
+            myName?.nickname = nicknameEdit.text.toString()
+            invalidateAll()
+            doneButton.visibility = View.GONE
+            nicknameEdit.visibility = View.GONE
+            nicknameText.visibility = View.VISIBLE
+
+        }
+
+
 
 
         val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
