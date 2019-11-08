@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import com.example.test.databinding.ActivityMainBinding
+
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
